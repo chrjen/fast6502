@@ -1,0 +1,14 @@
+[package]
+authors = ["Christer Jensen <chr.code@gmail.com>"]
+categories = ["emulators", "no-std"]
+description = "WIP Fast and accurate 6502 emulator."
+documentation = "https://docs.rs/fast6502"
+edition = "2021"
+keywords = ["emulator", "6502", "no_std"]
+license = "MIT OR Apache-2.0"
+name = "fast6502"
+readme = "README.md"
+repository = "https://github.com/chrjen/fast6502/"
+version = "0.1.0"
+
+[dependencies]
