@@ -1,6 +1,6 @@
 use core::num::Wrapping;
 
-use crate::Memory;
+use crate::memory::Memory;
 
 pub struct Mcu6502<M: Memory> {
     /// The accumulator is the processor register used in arithmetic and

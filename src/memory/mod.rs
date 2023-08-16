@@ -1,3 +1,9 @@
+mod ram;
+mod rom;
+
+pub use ram::Ram;
+pub use rom::Rom;
+
 use core::mem;
 
 #[allow(dead_code)]
