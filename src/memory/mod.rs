@@ -1,8 +1,5 @@
-mod ram;
-mod rom;
-
-pub use ram::Ram;
-pub use rom::Rom;
+#[cfg(any(feature = "alloc", doc))]
+mod alloc;
 
 use core::mem;
 
@@ -96,6 +93,32 @@ pub trait Memory {
         for (i, &value) in buf.iter().enumerate() {
             let offset: u16 = i.try_into().expect("buffer length fits inside a u16");
             self.write(addr + offset, value);
+        }
+    }
+}
+
+impl Memory for &[u8] {
+    #[inline]
+    fn get(&self, addr: u16) -> Option<u8> {
+        <[u8]>::get(self, usize::from(addr)).copied()
+    }
+
+    #[inline]
+    fn set(&mut self, _addr: u16, _value: u8) {
+        // Do nothing since this data structure is read-only.
+    }
+}
+
+impl Memory for &mut [u8] {
+    #[inline]
+    fn get(&self, addr: u16) -> Option<u8> {
+        <[u8]>::get(self, usize::from(addr)).copied()
+    }
+
+    #[inline]
+    fn set(&mut self, addr: u16, value: u8) {
+        if let Some(v) = <[u8]>::get_mut(self, usize::from(addr)) {
+            *v = value
         }
     }
 }

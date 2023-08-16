@@ -12,3 +12,7 @@ repository = "https://github.com/chrjen/fast6502/"
 version = "0.1.0"
 
 [dependencies]
+
+[features]
+alloc = []
+default = ["alloc"]
