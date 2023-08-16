@@ -34,6 +34,7 @@ pub trait Memory {
     /// any memory-mapped side effects when reading look at [`get`].
     ///
     /// [`get`]: Memory::get
+    #[inline]
     fn read(&mut self, addr: u16) -> u8 {
         self.get(addr).unwrap_or(0)
     }
@@ -43,6 +44,7 @@ pub trait Memory {
     /// any memory-mapped side effects when writing look at [`set`].
     ///
     /// [`set`]: Memory::set
+    #[inline]
     fn write(&mut self, addr: u16, value: u8) {
         self.set(addr, value);
     }
@@ -50,6 +52,7 @@ pub trait Memory {
     /// Same as [`get`], but for slices.
     ///
     /// [`get`]: Memory::get
+    #[inline]
     fn get_slice(&mut self, addr: u16, buf: &mut [Option<u8>]) {
         for (i, value) in buf.iter_mut().enumerate() {
             let offset: u16 = i.try_into().expect("buffer length should fit inside a u16");
@@ -60,6 +63,7 @@ pub trait Memory {
     /// Same as [`set`], but for slices.
     ///
     /// [`set`]: Memory::set
+    #[inline]
     fn set_slice(&mut self, addr: u16, buf: &[u8]) {
         for (i, &value) in buf.iter().enumerate() {
             let offset: u16 = i.try_into().expect("buffer length should fit inside a u16");
@@ -70,6 +74,7 @@ pub trait Memory {
     /// Same as [`read`], but for slices.
     ///
     /// [`read`]: Memory::read
+    #[inline]
     fn read_slice(&mut self, addr: u16, buf: &mut [u8]) {
         for (i, value) in buf.iter_mut().enumerate() {
             let offset: u16 = i.try_into().expect("buffer length should fit inside a u16");
@@ -80,6 +85,7 @@ pub trait Memory {
     /// Same as [`write`], but for slices.
     ///
     /// [`write`]: Memory::write
+    #[inline]
     fn write_slice(&mut self, addr: u16, buf: &[u8]) {
         for (i, &value) in buf.iter().enumerate() {
             let offset: u16 = i.try_into().expect("buffer length fits inside a u16");
