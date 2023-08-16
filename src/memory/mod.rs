@@ -49,7 +49,7 @@ pub trait Memory {
 
     /// Same as [`get`], but for slices.
     ///
-    /// [`get`]: Memory::read
+    /// [`get`]: Memory::get
     fn get_slice(&mut self, addr: u16, buf: &mut [Option<u8>]) {
         for (i, value) in buf.iter_mut().enumerate() {
             let offset: u16 = i.try_into().expect("buffer length should fit inside a u16");
