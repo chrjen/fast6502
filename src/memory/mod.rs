@@ -97,6 +97,30 @@ pub trait Memory {
     }
 }
 
+impl<M: Memory + ?Sized> Memory for &M {
+    #[inline]
+    fn get(&self, addr: u16) -> Option<u8> {
+        Memory::get(*self, addr)
+    }
+
+    #[inline]
+    fn set(&mut self, _addr: u16, _value: u8) {
+        // Do nothing since this data structure is read-only.
+    }
+}
+
+impl<M: Memory + ?Sized> Memory for &mut M {
+    #[inline]
+    fn get(&self, addr: u16) -> Option<u8> {
+        Memory::get(*self, addr)
+    }
+
+    #[inline]
+    fn set(&mut self, addr: u16, value: u8) {
+        Memory::set(*self, addr, value)
+    }
+}
+
 impl Memory for &[u8] {
     #[inline]
     fn get(&self, addr: u16) -> Option<u8> {
