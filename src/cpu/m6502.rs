@@ -1,8 +1,6 @@
 use core::num::Wrapping;
 
-use crate::memory::Memory;
-
-pub struct M6502<M: Memory> {
+pub struct M6502 {
     /// The accumulator is the processor register used in arithmetic and
     /// logical operations, and push/pop stack operations.
     a: Wrapping<u8>,
@@ -27,14 +25,10 @@ pub struct M6502<M: Memory> {
     /// Processor status flags change as the results of running various
     /// operations and may be used to modify the behaviour of later instructions.
     flags: u8,
-
-    /// The memory attached to this processor. All memory related operations
-    /// will read and write to this memory.
-    mem: M,
 }
 
-impl<M: Memory> M6502<M> {
-    pub fn new(mem: M) -> M6502<M> {
+impl M6502 {
+    pub fn new() -> M6502 {
         M6502 {
             a: Wrapping(0),
             x: Wrapping(0),
@@ -42,7 +36,6 @@ impl<M: Memory> M6502<M> {
             sp: Wrapping(0),
             pc: Wrapping(0),
             flags: 0,
-            mem,
         }
     }
 
@@ -92,13 +85,5 @@ impl<M: Memory> M6502<M> {
 
     pub fn set_flags(&mut self, flags: u8) {
         self.flags = flags;
-    }
-
-    pub fn mem(&self) -> &M {
-        &self.mem
-    }
-
-    pub fn mem_mut(&mut self) -> &mut M {
-        &mut self.mem
     }
 }
