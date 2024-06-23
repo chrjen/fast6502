@@ -1,6 +1,6 @@
 #![no_std]
 
-pub(crate) mod ic;
+pub(crate) mod cpu;
 pub mod memory;
 
-pub use ic::Mcu6502;
+pub use cpu::M6502;

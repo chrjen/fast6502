@@ -2,7 +2,7 @@ use core::num::Wrapping;
 
 use crate::memory::Memory;
 
-pub struct Mcu6502<M: Memory> {
+pub struct M6502<M: Memory> {
     /// The accumulator is the processor register used in arithmetic and
     /// logical operations, and push/pop stack operations.
     a: Wrapping<u8>,
@@ -33,9 +33,9 @@ pub struct Mcu6502<M: Memory> {
     mem: M,
 }
 
-impl<M: Memory> Mcu6502<M> {
-    pub fn new(mem: M) -> Mcu6502<M> {
-        Mcu6502 {
+impl<M: Memory> M6502<M> {
+    pub fn new(mem: M) -> M6502<M> {
+        M6502 {
             a: Wrapping(0),
             x: Wrapping(0),
             y: Wrapping(0),
